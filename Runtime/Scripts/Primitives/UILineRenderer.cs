@@ -88,6 +88,9 @@ namespace UnityEngine.UI.Extensions
 
         [Tooltip("Bezier method to apply to line, see docs for options\nCan't be used in conjunction with Resolution as Bezier already changes the resolution")]
         public BezierType BezierMode = BezierType.None;
+        
+        [Tooltip("A Line Renderer component should be on a RectTransform positioned at (0,0,0), do not use in child Objects.\nFor best results, create separate RectTransforms as children of the canvas positioned at (0,0) for a UILineRenderer and do not move.")]
+        public bool CheckValidGlobalPosition = true;
 
         public int BezierSegmentsPerCurve
         {
@@ -499,7 +502,7 @@ namespace UnityEngine.UI.Extensions
             {
 				m_points = new Vector2[1];
             }
-			if (transform.GetComponent<RectTransform>().position != Vector3.zero)
+			if (CheckValidGlobalPosition && transform.GetComponent<RectTransform>().position != Vector3.zero)
 			{
 				Debug.LogWarning("A Line Renderer component should be on a RectTransform positioned at (0,0,0), do not use in child Objects.\nFor best results, create separate RectTransforms as children of the canvas positioned at (0,0) for a UILineRenderer and do not move.");
 			}
